@@ -7,32 +7,33 @@
 
 class Profesor{
 public:
-  void inicializar_disponibilidad(); //metodo que llena el vector dispinibilidad
-                                //con 1 en el horario que el profesor se encuentra disponible
+  void llenar_profesor(); //inicializa el profesor con los datos que se reciben por parametro
 
   void cambiar_disponibilidad(); //cambia la disponibilidad del profesor cuando se le asigna un ramo
 private:
-  int id_profesor;
-  string nombre;
-  vector int disponibilidad_profesor (39,1) //Vector con 0 y 1, 0 es no disponible y 1 disponible
-                                            //se considera cada espacio del vector como un bloque horario
-                                            //cada dia tiene 7 bloques, menos el sabado que tiene 4 bloques
+  string id_profesor;
+  string nombres;
+  string apellidos;
+  vector <vector< int>> disponibilidad_profesor //Vector con 0 y 1, 0 es no disponible y 1 disponible
+                                                //el primer vector representa el dia y el segundo el bloque
 };
+
+
 class Sala{
 public:
-  void cambiar_disponibilidad(); //cambia la disponibilidad de la sala una vez que se asigna un curso en cierto horario
-  void asignar_id(); //le asigna una id a la sala de acuerdo al numero y edificio
+  void llenar_sala (); //cambia la disponibilidad de la sala una vez que se asigna un curso en cierto horario
+
 
 private:
-  int id_sala; //identificacion unica de la Sala
+  string id_sala; //identificacion unica de la Sala
   string edificio; //edificio al cual pertenece la Sala
-  int numero; //numero de Sala
-  vector int disponibilidad_sala (39,1); //funciona igual que la disponibilidad_profesor
+  string numero_sala; //numero de Sala
+
 }
 
 
-
-class Seccion{ //Seccion de un curso que tiene asignado solo un profesor, una sala y un horario.
+/*
+class Secciones{ //Seccion de un curso que tiene asignado solo un profesor, una sala y un horario.
               // Un profesor puede hacer mas de una seccion pero el horario debe ser distinto.
 
 public:
@@ -41,29 +42,30 @@ public:
 
 
 private:
-  int id_seccion;
-  int id_curso;
-  int id_sala;
-  int id_profesor;
-  int bloques_asignados; //cantidad de bloques asignados de la asignatura.
-  vector int horario(39,0); // vector que contiene el horario asignado para la Seccion
+  string id_seccion;
+  string id_curso;
+  string id_sala;
+  string id_profesor;
+  string bloques_asignados; //cantidad de bloques asignados de la asignatura.
+  vector <vector< int >> horario; // vector que contiene el horario asignado para la Seccion
                             //se inicializa en 0 y se llena con 1 en el horario asignado.
-
-  vector int bloques_diarios (6,4); // vector
-
+                            //el primer vector representa los dias y el segundo los bloques horarios
 };
+
+*/
+
 
 class Curso{ //Asignatura que tiene cantidad de bloques y un codigo de asignatura.
           //puede ser dictada por un profesor o más pero no en el mismo horario.
 public:
-  void verificar_profesores(); //verifica los profesores que pueden dictar la Asignatura
-                               //el resultado es arrojado a un vector que contiene el id del profesor.
+  void inicializar_cursos();
+  void agregar_profesor();
 
   void
 private:
-  int id_curso;
-  int cantidad_bloques;
-  vector int profes_dictan;
+  string id_curso;
+  string cantidad_bloques;
+  vector string profes_dictan;
 
 
 
