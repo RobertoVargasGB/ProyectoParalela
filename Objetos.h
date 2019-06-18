@@ -4,6 +4,8 @@
 #include <fstream>
 #include <stdio.h>
 
+using namespace std;
+
 
 class Profesor{
 public:
