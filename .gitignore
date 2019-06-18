@@ -30,7 +30,8 @@
 *.exe
 *.out
 *.app
+*.xlxs
 
 # Carpetas
-* /xlnt
-* /xlsxio
+*/xlnt
+*/xlsxio
