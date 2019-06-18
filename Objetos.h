@@ -65,7 +65,7 @@ public:
 private:
   string id_curso;
   string cantidad_bloques;
-  vector string profes_dictan;
+
 
 
 
