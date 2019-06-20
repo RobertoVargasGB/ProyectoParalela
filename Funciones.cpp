@@ -59,10 +59,10 @@ vector <Curso> leer_cursos(char *argv[]){
 }
 vector <Profesor> leer_profes(char *argv[]){
   vector <Profesor> lectura_profes;
+  vector <vector> disponibilidad;
   xlnt::workbook archivo_profes;
   archivo_profes.load(argv[]);
 
-  //crea la matriz donde se guarda la lectura del archivo Docentes
   vector <vector<string>> matriz_profes=leer_pagina(archivo_profes,0);
   int cantidad_hojas= archivo_profes.sheets_count(); //se cuenta la cantidad de hojas del archivo Docentes
 
@@ -71,10 +71,16 @@ vector <Profesor> leer_profes(char *argv[]){
     string nombres=matriz_profe.at(profe).at(1);
     string apellidos=matriz_profe.at(profe).at(2);
 
-    vector<vector< string>> matriz_disponibilidad;
-    vector<string> disponibilidad_dia;
     for (int dia=0; dia< cantidad_hojas;dia++){
-      disponibilidad_dia.push_back()
+      vector <vector<string>> matriz_profe_dia =leer_pagina(archivo_profes,dia);
+
+
+
+
+
+
+
+
 
 
     }
@@ -83,7 +89,5 @@ vector <Profesor> leer_profes(char *argv[]){
 
 
   }
-
-
 
 }

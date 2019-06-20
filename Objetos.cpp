@@ -17,13 +17,13 @@ Profesor::Profesor(){
   this -> disponibilidad_profesor = 0;
 }
 //funciones
-Profesor::inicializar_disponibilidad (string id, string nombre, string apellido, vector <vector<int>> disponibilidad,){
+Profesor::inicializar_disponibilidad (string id, string nombre, string apellido, vector <vector<string>> disponibilidad,){
   this -> id_profesor=id;
   this -> nombres = nombre;
   this -> apellidos =apellido;
   this -> disponibilidad_profesor = disponibilidad;
 }
-Profesor::cambiar_disponibilidad (vector>vector<int>> disponibilidad){
+Profesor::cambiar_disponibilidad (vector>vector<string>> disponibilidad){
   this -> disponibilidad_profesor=disponibilidad;
 }
 
@@ -65,10 +65,10 @@ Curso:Curso(){
   this -> profes_dictan=0;
 }
 
-Curso::inicializar_cursos(string id, string bloques, vector <string> profes){
+Curso::llenar_curso(string id, string bloques){
   this -> id_curso=id;
   this -> cantidad_bloques=bloques;
-  this -> profes_dictan=profes;
+
 }
 
 Curso::agregar_profesor(string id_profesor){
