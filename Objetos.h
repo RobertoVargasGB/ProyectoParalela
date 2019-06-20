@@ -61,6 +61,7 @@ public:
   Curso();
   void llenar_curso(string,string);
   void agregar_profesor(string);
+  void imprimir_curso();
 
 
 private:

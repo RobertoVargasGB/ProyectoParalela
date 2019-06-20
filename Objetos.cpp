@@ -80,6 +80,13 @@ void Curso::llenar_curso(string id, string bloques){
   this -> cantidad_bloques=bloques;
 }
 
+void Curso::imprimir_curso(){
+
+    string id=id_curso;
+    string bloques=cantidad_bloques;
+    cout << "Curso " << id <<" , Cantidad de bloques :"<<bloques<<endl;
+}
+
   void Curso::agregar_profesor(string id_profesor){
 
 

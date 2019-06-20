@@ -49,19 +49,26 @@ void imprimir_vector_salas (vector <Sala> vector){
   }
 }
 
+void imprimir_vector_cursos (vector <Curso> vector){
+  for (int i=0; i<vector.size();i++){
+    Curso curso=vector.at(i);
+    curso.imprimir_curso();
+  }
+}
+
+
+
+
 
 //********************funciones de llenado ***************************
 
-
-
-
-vector <Curso> leer_cursos(char *argv[]){
+vector <Curso> leer_cursos(xlnt::workbook wb){
   vector <Curso> lectura_cursos;
-  xlnt::workbook archivo_curso;
-  archivo_curso.load(argv[1]); //carga del xlxs
+  // xlnt::workbook archivo_curso;
+  // archivo_curso.load(argv[1]); //carga del xlxs
 
   //crea la matriz donde se guarda la lectura del archivo cursos
-  vector <vector <string>> matriz_curso=leer_pagina(archivo_curso,0);
+  vector <vector <string>> matriz_curso=leer_pagina(wb,0);
 
   for (int curso = 1; curso <matriz_curso.size(); curso++){
     string id_curso = matriz_curso.at(curso).at(0);
@@ -70,6 +77,7 @@ vector <Curso> leer_cursos(char *argv[]){
     nuevo_curso.llenar_curso(id_curso,cantidad_bloques);
     lectura_cursos.push_back(nuevo_curso);
   }
+  return lectura_cursos;
 }
 
 
