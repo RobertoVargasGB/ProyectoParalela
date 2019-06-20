@@ -42,6 +42,13 @@ void imprimir(vector<vector<string>> vector){
   }
 }
 
+void imprimir_vector (vector <Sala> vector){
+  for (int i=0; i<vector.size();i++){
+    cout << "Objeto " <<i << " :" <<vector.at(i)<<endl;
+  }
+
+}
+
 
 //********************funciones de llenado ***************************
 
@@ -65,11 +72,11 @@ vector <Curso> leer_cursos(char *argv[]){
   }
 }
 
-/*
-vector<Sala> leer_salas(char *argv[]){
+
+vector <Sala> leer_salas(xlnt::workbook wb){
   vector <Sala> lectura_salas;
   xlnt::workbook archivo_sala; //objeto donde se cargará el xlsx
-  archivo_sala.load(argv[]); //carga del xlxs
+  archivo_sala.load(argv[3]); //carga del xlxs
 
   //crea la matriz donde se guarda la lectura del archivo salas
   vector< vector<string> > matriz_sala = leer_pagina(archivo_sala, 0);
@@ -79,8 +86,10 @@ vector<Sala> leer_salas(char *argv[]){
     string edificio = matriz_sala.at(sala).at(0);
     string numero_sala = matriz_sala.at(sala).at(1);
     string id_sala = edificio + "-" + numero_sala;
-    Sala nueva_sala();
-    nueva_sala.llenar_sala(id_sala,edificio,numero_sala);
+    Sala nueva_sala;
+    vector <vector<string>> disponibilidad;
+
+    nueva_sala.llenar_sala(id_sala,edificio,numero_sala,disponibilidad);
 
     lectura_salas.push_back(nueva_sala);
   }
@@ -88,6 +97,8 @@ vector<Sala> leer_salas(char *argv[]){
 }
 
 
+
+/*
 vector <Profesor> leer_profes(char *argv[]){
   vector <Profesor> lectura_profes;
   xlnt::workbook archivo_profes;
