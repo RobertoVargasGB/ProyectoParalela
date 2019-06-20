@@ -22,9 +22,9 @@ class Sala{
 public:
   Sala();
   void llenar_sala(string,string,string,vector<vector<string>>); //cambia la disponibilidad de la sala una vez que se asigna un curso en cierto horario
+  void imprimir_sala ();
 
-
-//private:
+private:
   string id_sala; //identificacion unica de la Sala
   string edificio; //edificio al cual pertenece la Sala
   string numero_sala; //numero de Sala

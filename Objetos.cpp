@@ -4,6 +4,7 @@
 #include <fstream>
 #include <stdio.h>
 #include "Objetos.h"
+#include "Funciones.h"
 #include <xlnt/xlnt.hpp>
 
 using namespace xlnt;
@@ -45,6 +46,14 @@ void Sala::llenar_sala(string id, string edificio, string numero, vector <vector
   this -> numero_sala=numero;
 
 }
+void Sala::imprimir_sala(){
+
+    string edif= edificio;
+    string id=id_sala;
+    string numero=numero_sala;
+    cout << "sala " << id <<endl;
+}
+
 
 //*******clase Seccion**********
 //constructor

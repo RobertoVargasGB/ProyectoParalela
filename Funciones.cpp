@@ -42,15 +42,11 @@ void imprimir(vector<vector<string>> vector){
   }
 }
 
-void imprimir_vector (vector <Sala> vector){
+void imprimir_vector_salas (vector <Sala> vector){
   for (int i=0; i<vector.size();i++){
     Sala sala=vector.at(i);
-    string edificio= sala.edificio;
-    string id=sala.id_sala;
-    string numero=sala.numero_sala;
-    cout << id << " " << edificio << " " <<numero<<endl;
+    sala.imprimir_sala();
   }
-
 }
 
 
