@@ -59,13 +59,14 @@ class Curso{ //Asignatura que tiene cantidad de bloques y un codigo de asignatur
           //puede ser dictada por un profesor o más pero no en el mismo horario.
 public:
   Curso();
-  void llenar_curso(string,string);
+  void llenar_curso(string,string,string);
   void agregar_profesor(string);
   void imprimir_curso();
 
 
 private:
   string id_curso;
+  string nombre_curso;
   string cantidad_bloques;
 
 

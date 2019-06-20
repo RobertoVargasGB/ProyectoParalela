@@ -72,11 +72,13 @@ Secciones::agregar_profesor()
 //**************clase curso*****************
 Curso::Curso(){
   this -> id_curso="0";
+  this ->nombre_curso= "0";
   this -> cantidad_bloques="0";
 }
 
-void Curso::llenar_curso(string id, string bloques){
+void Curso::llenar_curso(string id,string nombre, string bloques){
   this -> id_curso=id;
+  this -> nombre_curso= nombre;
   this -> cantidad_bloques=bloques;
 }
 
@@ -84,7 +86,7 @@ void Curso::imprimir_curso(){
 
     string id=id_curso;
     string bloques=cantidad_bloques;
-    cout << "Curso " << id <<" , Cantidad de bloques :"<<bloques<<endl;
+    cout << "Curso "<<nombre_curso <<",   codigo "<< id <<" ,   cantidad de bloques :"<<bloques<<endl;
 }
 
   void Curso::agregar_profesor(string id_profesor){

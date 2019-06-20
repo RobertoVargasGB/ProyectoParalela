@@ -72,9 +72,10 @@ vector <Curso> leer_cursos(xlnt::workbook wb){
 
   for (int curso = 1; curso <matriz_curso.size(); curso++){
     string id_curso = matriz_curso.at(curso).at(0);
+    string nombre_curso= matriz_curso.at(curso).at(1);
     string cantidad_bloques =matriz_curso.at(curso).at(5);
     Curso nuevo_curso;
-    nuevo_curso.llenar_curso(id_curso,cantidad_bloques);
+    nuevo_curso.llenar_curso(id_curso,nombre_curso,cantidad_bloques);
     lectura_cursos.push_back(nuevo_curso);
   }
   return lectura_cursos;
