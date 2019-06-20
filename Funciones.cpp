@@ -44,7 +44,11 @@ void imprimir(vector<vector<string>> vector){
 
 void imprimir_vector (vector <Sala> vector){
   for (int i=0; i<vector.size();i++){
-    cout << "Objeto " <<i << " :" <<vector.at(i)<<endl;
+    Sala sala=vector.at(i);
+    string edificio= sala.edificio;
+    string id=sala.id_sala;
+    string numero=sala.numero_sala;
+    cout << id << " " << edificio << " " <<numero<<endl;
   }
 
 }
@@ -75,11 +79,11 @@ vector <Curso> leer_cursos(char *argv[]){
 
 vector <Sala> leer_salas(xlnt::workbook wb){
   vector <Sala> lectura_salas;
-  xlnt::workbook archivo_sala; //objeto donde se cargará el xlsx
-  archivo_sala.load(argv[3]); //carga del xlxs
+  // xlnt::workbook archivo_sala; //objeto donde se cargará el xlsx
+  // archivo_sala.load(argv[3]); //carga del xlxs
 
   //crea la matriz donde se guarda la lectura del archivo salas
-  vector< vector<string> > matriz_sala = leer_pagina(archivo_sala, 0);
+  vector< vector<string> > matriz_sala = leer_pagina(wb, 0);
 
   for (int sala = 1; sala < matriz_sala.size(); sala++){
 
