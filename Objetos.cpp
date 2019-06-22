@@ -20,11 +20,11 @@ Profesor::Profesor(){
 
 }
 //funciones
-void Profesor::llenar_profesor(string id, string nombre, string apellido, vector <vector<string>> disponibilidad){
+void Profesor::llenar_profesor(string id, string nombre, string apellido){
   this -> id_profesor=id;
   this -> nombres = nombre;
   this -> apellidos =apellido;
-  this -> disponibilidad_profesor = disponibilidad;
+
 }
   void Profesor::cambiar_disponibilidad(vector<vector<string>> disponibilidad){
   this -> disponibilidad_profesor=disponibilidad;

@@ -13,7 +13,7 @@
 using namespace xlnt;
 using namespace std;
 
-//********************funciones de lectura e impresion ***************************
+//********************funciones de lectura de pagina e impresion ***************************
 
 vector<vector<string>> leer_pagina(xlnt::workbook wb, int index){
 
@@ -60,7 +60,7 @@ void imprimir_vector_cursos (vector <Curso> vector){
 
 
 
-//********************funciones de llenado ***************************
+//********************funciones de lectura y llenado ***************************
 
 vector <Curso> leer_cursos(xlnt::workbook wb){
   vector <Curso> lectura_cursos;
@@ -107,28 +107,37 @@ vector <Sala> leer_salas(xlnt::workbook wb){
 
 
 
-/*
-vector <Profesor> leer_profes(char *argv[]){
+
+vector <Profesor> leer_profes(xlnt::workbook wb){
   vector <Profesor> lectura_profes;
-  xlnt::workbook archivo_profes;
-  archivo_profes.load(argv[]);
-
+  // xlnt::workbook archivo_profes;
+  // archivo_profes.load(argv[]);
+  int cantidad_hojas= wb.sheets_count(); //se cuenta la cantidad de hojas del archivo Docentes
   //crea la matriz donde se guarda la lectura del archivo Docentes
-  vector <vector<string>> matriz_profes=leer_pagina(archivo_profes,0);
-  int cantidad_hojas= archivo_profes.sheets_count(); //se cuenta la cantidad de hojas del archivo Docentes
+  vector <vector<string>> matriz_profes=leer_pagina(wb,0);
+  vector<string> disponibilidad_dia;
+  vector<vector< string>> matriz_disponibilidad;
+  Profesor nuevo_profe;
+  
 
-  for (int profe=1; profe< matriz_profes.size(); profe++){
-    string id_profesor=matriz_profe.at(profe).at(0);
-    string nombres=matriz_profe.at(profe).at(1);
-    string apellidos=matriz_profe.at(profe).at(2);
+  for (int profe=1; profe< matriz_profes.size(); profe++){ // se recorre la info obtenida por filas
+    string id_profesor=matriz_profe.at(profe).at(0); // se guarda la id del profe
+    string nombres=matriz_profe.at(profe).at(1); // se guardan nombres del profe
+    string apellidos=matriz_profe.at(profe).at(2); // se guardan apellidos del profe
+    for(int i=3;i<matriz_profe.size(); i++){
+      string aux=matriz_profe.at(profe).at(i);
+      if(aux[0]=='N'){
+        disponibilidad_dia.push_back('0');
+      }
+      else{
+        disponibilidad_dia.push_back('1');
+      }
+    nuevo_profe.llenar_profesor(id_profesor,nombres,apellidos);
 
-    vector<vector< string>> matriz_disponibilidad;
-    vector<string> disponibilidad_dia;
-    for (int dia=0; dia< cantidad_hojas;dia++){
-      disponibilidad_dia.push_back()
+
+    }
 
 
     }
   }
 }
-*/

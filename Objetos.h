@@ -14,7 +14,7 @@ private:
   string nombres;
   string apellidos;
   vector <vector< string>> disponibilidad_profesor; //Vector con 0 y 1, 0 es no disponible y 1 disponible
-                                                //el primer vector representa el dia y el segundo el bloque
+                                                //el primer vector representa el bloque y el segundo el día
 };
 
 
