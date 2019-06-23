@@ -7,7 +7,7 @@ class Profesor{
 public:
   Profesor();
   void llenar_profesor(string,string,string,vector<vector<string>>); //inicializa el profesor con los datos que se reciben por parametro
-
+  void imprimir_profe();
   void cambiar_disponibilidad(vector<vector<string>>); //cambia la disponibilidad del profesor cuando se le asigna un ramo
 private:
   string id_profesor;

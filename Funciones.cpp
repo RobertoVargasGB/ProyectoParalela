@@ -56,6 +56,19 @@ void imprimir_vector_cursos (vector <Curso> vector){
   }
 }
 
+void imprimir_vector_profes(vector <vector<Profesor>> vector){
+  for(int i=0; i<vector.size();i++){
+    Profesor profe=vector.at(i).at(0);
+    if(i==3){
+      for(int j=0; j<vector.size();j++){
+        profe=vector.at(i).at(j);
+      }
+    }
+    profe.imprimir_profe();
+
+  }
+}
+
 
 
 
@@ -67,7 +80,8 @@ vector <Curso> leer_cursos(xlnt::workbook wb){
   // xlnt::workbook archivo_curso;
   // archivo_curso.load(argv[1]); //carga del xlxs
 
-  //crea la matriz donde se guarda la lectura del archivo cursos
+  //crea la matriz donde se guarda la lectura del archivo curso// vector <Curso> Cursos = leer_cursos(xlscualquiera);
+  // imprimir_vector_cursos(Cursos);s
   vector <vector <string>> matriz_curso=leer_pagina(wb,0);
 
   for (int curso = 1; curso <matriz_curso.size(); curso++){
@@ -109,35 +123,34 @@ vector <Sala> leer_salas(xlnt::workbook wb){
 
 
 vector <Profesor> leer_profes(xlnt::workbook wb){
-  vector <Profesor> lectura_profes;
-  // xlnt::workbook archivo_profes;
-  // archivo_profes.load(argv[]);
-  int cantidad_hojas= wb.sheets_count(); //se cuenta la cantidad de hojas del archivo Docentes
-  //crea la matriz donde se guarda la lectura del archivo Docentes
+  vector <vector<Profesor>> lectura_profes;
   vector <vector<string>> matriz_profes=leer_pagina(wb,0);
-  vector<string> disponibilidad_dia;
-  vector<vector< string>> matriz_disponibilidad;
-  Profesor nuevo_profe;
-  
 
-  for (int profe=1; profe< matriz_profes.size(); profe++){ // se recorre la info obtenida por filas
-    string id_profesor=matriz_profe.at(profe).at(0); // se guarda la id del profe
-    string nombres=matriz_profe.at(profe).at(1); // se guardan nombres del profe
-    string apellidos=matriz_profe.at(profe).at(2); // se guardan apellidos del profe
-    for(int i=3;i<matriz_profe.size(); i++){
-      string aux=matriz_profe.at(profe).at(i);
-      if(aux[0]=='N'){
-        disponibilidad_dia.push_back('0');
+  for(int profe=0; profe<matriz_profes.size();profe++){
+    vector<vector<string>> matriz_disponibilidad;
+    string id_profesor=matriz_profes.at(profe).at(0); //se guarda la id del profe
+    string nombres=matriz_profes.at(profe).at(1); //se guardan nombres del profe
+    string apellidos=matriz_profes.at(profe).at(2); //se guardan apellidos del profe
+
+    for (int dia=0;dia <6; dia++){ // se recorre el archivo por dia para obtener la info de disponibilidad
+      vector <vector<string>> matriz_profes=leer_pagina(wb,dia); //se cambia de pagina
+      vector <string> disponibilidad_dia; // se crea el vector disponibilidad y se renueva cada día
+      for(int i=3; i<matriz_profes.size(); i++){ // se recorren solo los campos de disponibilidad
+        string aux=matriz_profes.at(profe).at(i); //variable auxiliar donde se guarda la info de disponibilidad
+        if(aux[0]=='N'){ //se evalua con que letra parte la palabra de aux
+            disponibilidad_dia.push_back("0"); //si parte con N se agrega un 0 en el vector disponibilidad
+          }
+        else{
+          disponibilidad_dia.push_back("1"); //si no parte con N se agrega un 1 en el vecto disponibilidad
+        }
       }
-      else{
-        disponibilidad_dia.push_back('1');
-      }
-    nuevo_profe.llenar_profesor(id_profesor,nombres,apellidos);
-
-
+      matriz_disponibilidad.push_back(disponibilidad_dia);
     }
 
-
-    }
+    Profesor nuevo_profe;
+    nuevo_profe.llenar_profesor(id_profesor,nombres,apellidos,matriz_disponibilidad);
+    lectura_profes.push_back(nuevo_profe);
   }
+  return lectura_profes;
+
 }

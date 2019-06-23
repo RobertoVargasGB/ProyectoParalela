@@ -20,14 +20,24 @@ Profesor::Profesor(){
 
 }
 //funciones
-void Profesor::llenar_profesor(string id, string nombre, string apellido){
+void Profesor::llenar_profesor(string id, string nombre, string apellido,vector<vector<string>> disponibilidad){
   this -> id_profesor=id;
   this -> nombres = nombre;
   this -> apellidos =apellido;
+  this -> disponibilidad_profesor=disponibilidad;
 
 }
   void Profesor::cambiar_disponibilidad(vector<vector<string>> disponibilidad){
   this -> disponibilidad_profesor=disponibilidad;
+}
+
+void Profesor::imprimir_profe(){
+
+
+    cout << "Id: " << id_profesor<<endl;
+    cout << "Nombres: " << nombres<<endl;
+    cout << "Apellidos: " << apellidos<<endl;
+    imprimir(disponibilidad_profesor);
 }
 
 
