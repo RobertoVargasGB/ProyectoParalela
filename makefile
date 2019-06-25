@@ -2,7 +2,7 @@ CXX= g++
 CXXFLAGS = -std=c++14
 
 FUENTE= main.cpp
-NOMBRE= horario.constructor
+NOMBRE= horario.out
 XLSX = archivos/Cursos.xlsx archivos/Docentes.xlsx archivos/Salas.xlsx
 
 CLASES= Objetos.cpp
