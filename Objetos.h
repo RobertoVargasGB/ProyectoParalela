@@ -9,12 +9,16 @@ public:
   void llenar_profesor(string,string,string,vector<vector<string>>); //inicializa el profesor con los datos que se reciben por parametro
   void imprimir_profe();
   void cambiar_disponibilidad(vector<vector<string>>); //cambia la disponibilidad del profesor cuando se le asigna un ramo
+  void agrega_disponibilidad(vector<string>);
+
+
 private:
   string id_profesor;
   string nombres;
   string apellidos;
   vector <vector< string>> disponibilidad_profesor; //Vector con 0 y 1, 0 es no disponible y 1 disponible
                                                 //el primer vector representa el bloque y el segundo el día
+
 };
 
 

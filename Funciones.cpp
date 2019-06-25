@@ -140,10 +140,10 @@ vector <Profesor> leer_profes(xlnt::workbook wb){
     string nombres=matriz_profes.at(profe).at(1); //se guardan nombres del profe
     string apellidos=matriz_profes.at(profe).at(2); //se guardan apellidos del profe
 
-    for (int dia=0;dia <5; dia++){ // se recorre el archivo por dia para obtener la info de disponibilidad
+    for (int dia=0;dia <6; dia++){ // se recorre el archivo por dia para obtener la info de disponibilidad
       vector <vector<string>> matriz_profes=leer_pagina(wb,dia); //se cambia de pagina
       vector <string> disponibilidad_dia; // se crea el vector disponibilidad y se renueva cada día
-      for(int i=3; i<9; i++){ // se recorren solo los campos de disponibilidad
+      for(int i=3; i<matriz_profes.at(profe).size(); i++){ // se recorren solo los campos de disponibilidad
         string aux=matriz_profes.at(profe).at(i); //variable auxiliar donde se guarda la info de disponibilidad
         if(aux[0]=='N'){ //se evalua con que letra parte la palabra de aux
             disponibilidad_dia.push_back("0"); //si parte con N se agrega un 0 en el vector disponibilidad
@@ -163,3 +163,61 @@ vector <Profesor> leer_profes(xlnt::workbook wb){
   return lectura_profes;
 
 }
+
+
+
+// vector <Profesor> leer_profes(xlnt::workbook wb){
+//   vector <Profesor> lectura_profes;
+//
+//   for (int dia=0;dia <5; dia++){
+//     if (dia==0){//crea los profesores y los agrega a un vector de tipo profesor
+//       vector <vector<string>> matriz_profes=leer_pagina(wb,0);
+//       for(int profe=0; profe<matriz_profes.size();profe++){
+//         vector<vector<string>> matriz_disponibilidad;
+//         vector <string> disponibilidad_dia;
+//         string id_profesor=matriz_profes.at(profe).at(0); //se guarda la id del profe
+//         string nombres=matriz_profes.at(profe).at(1); //se guardan nombres del profe
+//         string apellidos=matriz_profes.at(profe).at(2); //se guardan apellidos del profe
+//
+//         for(int i=3; i<10; i++){ // se recorren solo los campos de disponibilidad
+//           string aux=matriz_profes.at(profe).at(i); //variable auxiliar donde se guarda la info de disponibilidad
+//           if(aux[0]=='N'){ //se evalua con que letra parte la palabra de aux
+//               disponibilidad_dia.push_back("0"); //si parte con N se agrega un 0 en el vector disponibilidad
+//             }
+//           else{
+//             disponibilidad_dia.push_back("1"); //si no parte con N se agrega un 1 en el vecto disponibilidad
+//           }
+//
+//         }
+//         matriz_disponibilidad.push_back(disponibilidad_dia);
+//         Profesor nuevo_profe;
+//         nuevo_profe.llenar_profesor(id_profesor,nombres,apellidos,matriz_disponibilidad);
+//         lectura_profes.push_back(nuevo_profe);
+//       }
+//     }
+//
+//     if (dia !=0){ //modifica la disponibilidad de los profesores ya creados anteriormente
+//       vector <vector<string>> matriz_profes=leer_pagina(wb,dia); //se cambia de pagina
+//       for(int profe=0; profe<matriz_profes.size();profe++){
+//         vector <string> disponibilidad_dia;
+//
+//         for(int i=3; i<10; i++){ // se recorren solo los campos de disponibilidad
+//           string aux=matriz_profes.at(profe).at(i); //variable auxiliar donde se guarda la info de disponibilidad
+//           if(aux[0]=='N'){ //se evalua con que letra parte la palabra de aux
+//               disponibilidad_dia.push_back("0"); //si parte con N se agrega un 0 en el vector disponibilidad
+//             }
+//           else{
+//             disponibilidad_dia.push_back("1"); //si no parte con N se agrega un 1 en el vecto disponibilidad
+//           }
+//
+//         }
+//
+//         Profesor profesor=lectura_profes.at(profe);
+//         profesor.agrega_disponibilidad(disponibilidad_dia);
+//
+//
+//       }
+//     }
+//     }
+//     return lectura_profes;
+// }

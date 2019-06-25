@@ -40,6 +40,10 @@ void Profesor::imprimir_profe(){
     imprimir(disponibilidad_profesor);
 }
 
+void Profesor::agrega_disponibilidad(vector <string> disponibilidad){
+
+  disponibilidad_profesor.push_back(disponibilidad);
+}
 
 //********clase sala*********
 //constructor
