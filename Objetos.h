@@ -10,14 +10,14 @@ public:
   void imprimir_profe();
   void cambiar_disponibilidad(vector<vector<string>>); //cambia la disponibilidad del profesor cuando se le asigna un ramo
   void agrega_disponibilidad(vector<string>);
+  vector <vector< string>> disponibilidad_profesor; //Vector con 0 y 1, 0 es no disponible y 1 disponible
+                                                //el primer vector representa el bloque y el segundo el día
 
 
 private:
   string id_profesor;
   string nombres;
   string apellidos;
-  vector <vector< string>> disponibilidad_profesor; //Vector con 0 y 1, 0 es no disponible y 1 disponible
-                                                //el primer vector representa el bloque y el segundo el día
 
 };
 
