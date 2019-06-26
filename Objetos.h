@@ -6,10 +6,10 @@ using namespace std;
 class Profesor{
 public:
   Profesor();
-  void llenar_profesor(string,string,string,vector<vector<string>>); //inicializa el profesor con los datos que se reciben por parametro
+  void llenar_profesor(string,string,string,int,vector<vector<string>>); //inicializa el profesor con los datos que se reciben por parametro
   void imprimir_profe();
   void cambiar_disponibilidad(vector<vector<string>>); //cambia la disponibilidad del profesor cuando se le asigna un ramo
-  void agrega_disponibilidad(vector<string>);
+  void agrega_disponibilidad(vector<string>, int);
   vector <vector< string>> disponibilidad_profesor; //Vector con 0 y 1, 0 es no disponible y 1 disponible
                                                 //el primer vector representa el bloque y el segundo el día
 
@@ -18,6 +18,7 @@ private:
   string id_profesor;
   string nombres;
   string apellidos;
+  int prioridad;
 
 };
 
@@ -63,8 +64,7 @@ class Curso{ //Asignatura que tiene cantidad de bloques y un codigo de asignatur
           //puede ser dictada por un profesor o más pero no en el mismo horario.
 public:
   Curso();
-  void llenar_curso(string,string,string);
-  void agregar_profesor(string);
+  void llenar_curso(string,string,string,string) ;
   void imprimir_curso();
 
 
@@ -72,6 +72,7 @@ private:
   string id_curso;
   string nombre_curso;
   string cantidad_bloques;
+  string id_profesor;
 
 
 

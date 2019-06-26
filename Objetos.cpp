@@ -20,10 +20,11 @@ Profesor::Profesor(){
 
 }
 //funciones
-void Profesor::llenar_profesor(string id, string nombre, string apellido,vector<vector<string>> disponibilidad){
+void Profesor::llenar_profesor(string id, string nombre, string apellido,int prioridad, vector<vector<string>> disponibilidad){
   this -> id_profesor=id;
   this -> nombres = nombre;
   this -> apellidos =apellido;
+  this -> prioridad = prioridad;
   this -> disponibilidad_profesor=disponibilidad;
 
 }
@@ -37,12 +38,15 @@ void Profesor::imprimir_profe(){
     cout << "Id: " << id_profesor<<endl;
     cout << "Nombres: " << nombres<<endl;
     cout << "Apellidos: " << apellidos<<endl;
+    cout << "Prioridad:" <<prioridad<<endl;
     imprimir(disponibilidad_profesor);
+    cout<<endl;
 }
 
-void Profesor::agrega_disponibilidad(vector <string> disponibilidad_dia){
+void Profesor::agrega_disponibilidad(vector <string> disponibilidad_dia, int priority){
 
   disponibilidad_profesor.push_back(disponibilidad_dia);
+  prioridad=prioridad+priority;
 }
 
 //********clase sala*********
@@ -90,20 +94,15 @@ Curso::Curso(){
   this -> cantidad_bloques="0";
 }
 
-void Curso::llenar_curso(string id,string nombre, string bloques){
+void Curso::llenar_curso(string id,string nombre, string bloques, string id_profe){
   this -> id_curso=id;
   this -> nombre_curso= nombre;
   this -> cantidad_bloques=bloques;
+  this -> id_profesor= id_profe;
 }
 
 void Curso::imprimir_curso(){
 
-    string id=id_curso;
-    string bloques=cantidad_bloques;
-    cout << "Curso "<<nombre_curso <<",   codigo "<< id <<" ,   cantidad de bloques :"<<bloques<<endl;
-}
 
-  void Curso::agregar_profesor(string id_profesor){
-
-
-}
+    cout << "Curso "<<nombre_curso <<",   codigo "<< id_curso <<" ,   cantidad de bloques :"<< cantidad_bloques<< "  , id profe: "<< id_profesor<<endl;
+};
