@@ -24,7 +24,7 @@ void Profesor::llenar_profesor(string id, string nombre, string apellido,int pri
   this -> id_profesor=id;
   this -> nombres = nombre;
   this -> apellidos =apellido;
-  this -> prioridad = prioridad;
+  this -> prioridad_profe = prioridad;
   this -> disponibilidad_profesor=disponibilidad;
 
 }
@@ -47,14 +47,18 @@ void Profesor::agrega_disponibilidad(vector <string> disponibilidad_dia, int pri
 
   disponibilidad_profesor.push_back(disponibilidad_dia);
   prioridad_profe=prioridad_profe+priority;
+
 }
 int Profesor::get_prioridad(){
   return prioridad_profe;
 }
-int Profesor::get_id(){
+string Profesor::get_id(){
   return id_profesor;
 }
+vector<vector<string>> Profesor::get_disponibilidad_profesor(){
+  return disponibilidad_profesor;
 
+}
 //********clase sala*********
 //constructor
 Sala::Sala (){
@@ -69,36 +73,29 @@ void Sala::llenar_sala(int id, string edificio, string numero,string nombre, vec
   this -> edificio=edificio;
   this -> numero_sala=numero;
   this ->nombre_sala=nombre;
+  this -> disponibilidad_sala=disponibilidad;
 
 }
 void Sala::imprimir_sala(){
-    cout << "sala " << id_sala <<"  "<<nombre_sala<<endl;
+    cout << "sala " << id_sala <<"  "<<nombre_sala<< " "<< endl;
+    imprimir(disponibilidad_sala);
+    cout<<endl;
+}
+
+vector <vector<string>>Sala::get_disponibilidad_sala(){
+  return disponibilidad_sala;
 }
 
 
-
-//*******clase Seccion**********
-//constructor
-/*
-Secciones:Secciones(){
-  this -> id_seccion=0;
-  this -> id_curso=0;
-  this -> id_sala=0;
-  this ->id_profesor=0;
-  this ->bloques_asignados=0;
-  this ->horario=0;
-}
-Secciones::agregar_profesor()
-*/
 
 //**************clase curso*****************
 Curso::Curso(){
   this -> id_curso="0";
   this ->nombre_curso= "0";
-  this -> cantidad_bloques=0;
+  this -> cantidad_bloques="0";
 }
 
-void Curso::llenar_curso(string id,string nombre, int bloques, string id_profe){
+void Curso::llenar_curso(string id,string nombre, string bloques, string id_profe){
   this -> id_curso=id;
   this -> nombre_curso= nombre;
   this -> cantidad_bloques=bloques;
@@ -111,16 +108,18 @@ void Curso::imprimir_curso(){
     cout << "Curso "<<nombre_curso <<",   codigo "<< id_curso <<" ,   cantidad de bloques :"<< cantidad_bloques<< "  , id profe: "<< id_profesor<<endl;
 };
 
-int Curso::get_id_profesor(){
+string Curso::get_id_profesor(){
     return id_profesor;
 }
 
-int Curso::get_bloques(){
+string Curso::get_bloques(){
   return cantidad_bloques;
 }
 
-int Curso::set_bloques(int bloques){
+void Curso::set_bloques(string bloques){
   this -> cantidad_bloques=bloques;
+}
 
-
+string Curso::get_id_curso(){
+  return id_curso;
 }

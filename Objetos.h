@@ -10,16 +10,17 @@ public:
   void imprimir_profe();
   void cambiar_disponibilidad(vector<vector<string>>); //cambia la disponibilidad del profesor cuando se le asigna un ramo
   void agrega_disponibilidad(vector<string>, int);
-  vector <vector< string>> disponibilidad_profesor; //Vector con 0 y 1, 0 es no disponible y 1 disponible
   int get_prioridad();
-  int get_id();                                        //el primer vector representa el bloque y el segundo el día
+  string get_id();
+  vector <vector< string>> get_disponibilidad_profesor();
 
 
 private:
   string id_profesor;
   string nombres;
   string apellidos;
-  int prioridad_profe;
+  vector <vector< string>> disponibilidad_profesor; //Vector con 0 y 1, 0 es no disponible y 1 disponible
+  int prioridad_profe;                              //el primer vector representa el bloque y el segundo el día
 
 };
 
@@ -29,13 +30,14 @@ public:
   Sala();
   void llenar_sala(int,string,string,string,vector<vector<string>>);
   void imprimir_sala ();
+  vector <vector<string>> get_disponibilidad_sala();
 
 private:
   int id_sala;//identificacion unica de la Sala
   string nombre_sala;
   string edificio; //edificio al cual pertenece la Sala
   string numero_sala; //numero de Sala
-
+  vector<vector<string>> disponibilidad_sala;
 };
 
 
@@ -56,17 +58,19 @@ class Curso{ //Asignatura que tiene cantidad de bloques y un codigo de asignatur
           //puede ser dictada por un profesor o más pero no en el mismo horario.
 public:
   Curso();
-  void llenar_curso(string,string,int,string) ;
+  void llenar_curso(string,string,string,string) ;
   void imprimir_curso();
-  int get_id_profesor();
-  int get_bloques();
-  int set_bloques();
+  string get_id_profesor();
+  string get_bloques();
+  void set_bloques(string);
+  string get_id_curso();
+
 
 
 private:
   string id_curso;
   string nombre_curso;
-  int cantidad_bloques;
+  string cantidad_bloques;
   string id_profesor;
 
 };

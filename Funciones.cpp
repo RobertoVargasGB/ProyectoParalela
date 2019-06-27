@@ -41,6 +41,15 @@ void imprimir(vector<vector<string>> vector){
     cout << " " << '\n';
   }
 }
+void imprimir_enteros(vector<vector<int>> vector){
+  for (int i=0; i< vector.size(); i++){
+      cout << "Esta fila dice: ";
+    for (int j=0; j<vector.at(i).size(); j++){
+      cout << vector.at(i).at(j) <<" ";
+    }
+    cout << " " << '\n';
+  }
+}
 
 void imprimir_vector_salas (vector <Sala> vector){
   for (int i=0; i<vector.size();i++){
@@ -63,6 +72,9 @@ void imprimir_vector_profes (vector <Profesor> vector){
   }
 };
 
+void escribir_xlsx(){
+
+}
 
 
 //********************funciones de lectura y llenado ***************************
@@ -103,13 +115,30 @@ vector <Sala> leer_salas(xlnt::workbook wb){
     string nombre_sala = edificio + "-" + numero_sala;
     Sala nueva_sala;
     vector <vector<string>> disponibilidad;
+    for (int i=0;i<6;i++){
+      if(i==5){
+        vector <string> disponibilidad_dia;
+        for(int j=0;j<4;j++){
+          disponibilidad_dia.push_back("1");
+        }
+        disponibilidad.push_back(disponibilidad_dia);
+      }
+      else{
+        vector <string> disponibilidad_dia;
+        for (int j=0;j<7;j++){
+          disponibilidad_dia.push_back("1");
+        }
+        disponibilidad.push_back(disponibilidad_dia);
+      }
+    }
 
     nueva_sala.llenar_sala(id_sala,edificio,numero_sala,nombre_sala,disponibilidad);
 
     lectura_salas.push_back(nueva_sala);
   }
   return lectura_salas;
-};
+}
+
 
 vector <Profesor> leer_profes(xlnt::workbook wb){
   vector <Profesor> lectura_profes;
@@ -177,23 +206,40 @@ vector <Profesor> leer_profes(xlnt::workbook wb){
 // *optimizable for de prioridad, cantidad de cursos de los profes.
 
 
-vector <vector <vector<vector< Seccion >>>> crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos, vector <Sala> vector_salas){
+void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos, vector <Sala> vector_salas){
 
-  for (int sala=0;sala<salas.size();sala++){
+  for (int sala=0;sala<vector_salas.size();sala++){
 
     for(int dia=0; dia<6;dia++){
       if (dia==5){
         for(int bloque=0;bloque<4;bloque++){
-          for(int profe=0;profes<vector_profes.size();profes++){
+          for(int profe=0;profe<vector_profes.size();profe++){
             for (int priority=0;priority<39;priority++){
-              Profesor nuevo_profe=profes.at(profe);
+              Profesor nuevo_profe=vector_profes.at(profe);
+              Sala nueva_sala=vector_salas.at(sala);
               int prioridad=nuevo_profe.get_prioridad();
-              if(prioridad==priority){
+              vector<vector<string>> disponibilidad_profe = nuevo_profe.get_disponibilidad_profesor();
+              vector<vector<string>> disponibilidad_sala= nueva_sala.get_disponibilidad_sala();
+              if(prioridad == priority){
                 for(int curso=0;curso<vector_cursos.size();curso++){
                   Curso nuevo_curso=vector_cursos.at(curso);
-                  if (nuevo_profe.get_id()==nuevo_curso.get_id_profesor()){
-                    while (nuevo_curso.get_bloques()=!0){
-                      
+                  if (nuevo_profe.get_id() == nuevo_curso.get_id_profesor()){ // se compara la id del profesor con la de los cursos, para ver si el profe realiza ese curos
+                    string aux=nuevo_curso.get_bloques();
+                    int aux2= stoi(aux,nullptr,10);
+                    int bloque_actual=bloque;
+                    int dia_actual=dia;
+                    while (aux2=!0){
+
+                      if(disponibilidad_profe.at(bloque).at(dia_actual)=="1"&&disponibilidad_sala.at(bloque_actual).at(dia_actual)=="1" ){
+                        disponibilidad_profe.at(bloque_actual).at(dia_actual)="0";
+                        escribir_xlsx(sala,dia,bloque,nuevo_profe.get_id(),nuevo_curso.get_id_curso());
+
+
+
+
+
+                        aux2=aux2-2;
+
                     }
                   }
                 }
@@ -217,14 +263,4 @@ vector <vector <vector<vector< Seccion >>>> crear_horario(vector <Profesor> vect
 
     }
   }
-
-
-
-
-
-
-
-
-
-
-}
+ }
