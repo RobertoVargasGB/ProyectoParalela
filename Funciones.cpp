@@ -88,7 +88,6 @@ vector <Curso> leer_cursos(xlnt::workbook wb){
   return lectura_cursos;
 }
 
-
 vector <Sala> leer_salas(xlnt::workbook wb){
   vector <Sala> lectura_salas;
   // xlnt::workbook archivo_sala; //objeto donde se cargará el xlsx
@@ -98,20 +97,19 @@ vector <Sala> leer_salas(xlnt::workbook wb){
   vector< vector<string> > matriz_sala = leer_pagina(wb, 0);
 
   for (int sala = 1; sala < matriz_sala.size(); sala++){
-
+    int id_sala = sala-1;
     string edificio = matriz_sala.at(sala).at(0);
     string numero_sala = matriz_sala.at(sala).at(1);
-    string id_sala = edificio + "-" + numero_sala;
+    string nombre_sala = edificio + "-" + numero_sala;
     Sala nueva_sala;
     vector <vector<string>> disponibilidad;
 
-    nueva_sala.llenar_sala(id_sala,edificio,numero_sala,disponibilidad);
+    nueva_sala.llenar_sala(id_sala,edificio,numero_sala,nombre_sala,disponibilidad);
 
     lectura_salas.push_back(nueva_sala);
   }
   return lectura_salas;
 };
-
 
 vector <Profesor> leer_profes(xlnt::workbook wb){
   vector <Profesor> lectura_profes;
@@ -174,4 +172,59 @@ vector <Profesor> leer_profes(xlnt::workbook wb){
 }
 
 
-//************************Manipulando Datos obtenidos de los xlsx **************
+
+//******************Funcion que crea el horario************************
+// *optimizable for de prioridad, cantidad de cursos de los profes.
+
+
+vector <vector <vector<vector< Seccion >>>> crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos, vector <Sala> vector_salas){
+
+  for (int sala=0;sala<salas.size();sala++){
+
+    for(int dia=0; dia<6;dia++){
+      if (dia==5){
+        for(int bloque=0;bloque<4;bloque++){
+          for(int profe=0;profes<vector_profes.size();profes++){
+            for (int priority=0;priority<39;priority++){
+              Profesor nuevo_profe=profes.at(profe);
+              int prioridad=nuevo_profe.get_prioridad();
+              if(prioridad==priority){
+                for(int curso=0;curso<vector_cursos.size();curso++){
+                  Curso nuevo_curso=vector_cursos.at(curso);
+                  if (nuevo_profe.get_id()==nuevo_curso.get_id_profesor()){
+                    while (nuevo_curso.get_bloques()=!0){
+                      
+                    }
+                  }
+                }
+
+              }
+            }
+
+
+
+
+          }
+
+
+        }
+      }
+      else{
+        for(int bloque=0;bloque<7;bloque++){
+
+        }
+      }
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+}
