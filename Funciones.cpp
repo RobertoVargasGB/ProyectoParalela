@@ -247,11 +247,41 @@ void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos
                   }
                 }
               }
-            }
-          }
+            } // cierre del for profe
+          } // cierre del bloque
         } // cierre del dia sabado
         else{
           for(int bloque=0;bloque<7;bloque++){
+
+            for(int profe=0;profe<vector_profes.size();profe++){ // se recorre el vector profes que ingresa por parametro
+              Profesor nuevo_profe=vector_profes.at(profe);//se crea el objeto nuevo_profe con el fin de obtener la info de el
+              int prioridad=nuevo_profe.get_prioridad(); // se guarda en una variable la prioridad del profe
+
+              if(prioridad == priority){ // se encuentra al profesor con menor prioridad
+                vector<vector<string>> disponibilidad_profe = nuevo_profe.get_disponibilidad_profesor(); // se guarda la disponibilidad del profesor actual
+
+                for(int curso=0;curso<vector_cursos.size();curso++){ // se recorre el vector curso
+                  Curso nuevo_curso=vector_cursos.at(curso); // se crea el obejto nuevo curos donde se rescata la info del curso dia_actual
+
+                  if (nuevo_profe.get_id() == nuevo_curso.get_id_profesor()){ // se compara la id del profesor con la de los cursos, para ver si el profe realiza ese curos
+                    string aux=nuevo_curso.get_bloques(); // se guarda en una variable auxiliar los bloques del curso
+                    int aux2= stoi(aux,nullptr,10); // en otra variable auxiliar para pasar el dato de string a int que son los bloques del curso
+                    int bloque_actual=bloque; //  es necesario (?)
+                    int dia_actual=dia; //  es necesario (?)
+
+                    while (aux2=!0){
+                      if(disponibilidad_profe.at(bloque_actual).at(dia_actual)=="1"&&disponibilidad_sala.at(bloque_actual).at(dia_actual)=="1" ){ // se comprueba la disponibilidad tanto del profe como la de la sala
+                        disponibilidad_profe.at(bloque_actual).at(dia_actual)="0"; // al usar la disponibilidad del profe se cambia a no disponible
+                        disponibilidad_sala.at(bloque_actual).at(dia_actual)=="0"; // al usar la disponibilidad de la sala se cambia a no disponible
+                        escribir_xlsx(sala,dia,bloque,nuevo_profe.get_id(),nuevo_curso.get_id_curso()); // funcion que escribe excel de salida
+                        aux2=aux2-2;// se resta de a 2 ya que la cantidad de bloques corresponden a las horas pedagogicas
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
           }
         }
       }
