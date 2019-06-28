@@ -74,7 +74,7 @@ void imprimir_vector_profes (vector <Profesor> vector){
 };
 
 void escribir_xlsx(){
-
+  
 }
 
 
@@ -280,11 +280,11 @@ void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos
                   }
                 }
               }
-            }
+            } // cierre del for profe
+          } // Cierre del for de bloques
+        }// cierre del else
 
-          }
-        }
-      }
-    }
-  }
+      } // cierre del dia
+    }// cierre de la sala
+  }// cierre de la prioridad
 }
