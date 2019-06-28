@@ -73,8 +73,29 @@ void imprimir_vector_profes (vector <Profesor> vector){
   }
 };
 
-void escribir_xlsx(){
-  
+void escribir_xlsx(int cols, int rows){
+  xlnt::workbook wb;
+    auto ws = wb.create_sheet();
+
+    for(int index = 0; index < rows; index++)
+    {
+        if ((index + 1) % (rows / 10) == 0)
+        {
+            std::string progress = std::string((index + 1) / (1 + rows / 10), '.');
+            std::cout << "\r" << progress;
+            std::cout.flush();
+        }
+
+		for (int i = 0; i < cols; i++)
+		{
+			ws.cell(xlnt::cell_reference(i + 1, index + 1)).value(i);
+		}
+    }
+
+    std::cout << std::endl;
+
+    auto filename = "benchmark.xlsx";
+  wb.save(filename);
 }
 
 
@@ -205,7 +226,7 @@ vector <Profesor> leer_profes(xlnt::workbook wb){
 //******************Funcion que crea el horario************************
 // *optimizable for de prioridad, cantidad de cursos de los profes.
 
-
+/*
 void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos, vector <Sala> vector_salas){
 
   for (int priority=0;priority<39;priority++){ // Se privilegia la prioridad del profe ante cualquier cosa
@@ -288,3 +309,4 @@ void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos
     }// cierre de la sala
   }// cierre de la prioridad
 }
+*/

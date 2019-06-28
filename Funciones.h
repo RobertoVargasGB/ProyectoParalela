@@ -19,4 +19,4 @@ void imprimir_vector_salas(vector<Sala> vector);
 void imprimir_vector_cursos(vector<Curso> vector);
 void imprimir_vector_profes(vector<Profesor> vector);
 
-void escribir_xlsx(int sala,int dia,int bloque,string id_profe,string id_profe_curso);
+void escribir_xlsx(int cols, int rows);
