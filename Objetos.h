@@ -31,6 +31,7 @@ public:
   void llenar_sala(int,string,string,string,vector<vector<string>>);
   void imprimir_sala ();
   vector <vector<string>> get_disponibilidad_sala();
+  string get_nombre_sala();
 
 private:
   int id_sala;//identificacion unica de la Sala

@@ -19,7 +19,7 @@ int main (int argc, char *argv[]){
   // vector< vector<string> > vectorSheet = leer_pagina(xlscualquiera, 0);
   // imprimir(vectorSheet);
 
-  //vector <Sala> Salitas = leer_salas(xlscualquiera);
+  vector <Sala> Salitas = leer_salas(xlscualquiera);
   //imprimir_vector_salas(Salitas);
 
   //vector <Curso> Cursos = leer_cursos(xlscualquiera);
@@ -27,8 +27,6 @@ int main (int argc, char *argv[]){
 
   //vector <Profesor> Profe = leer_profes(xlscualquiera);
   // imprimir_vector_profes(Profe);
-  int cols = 4;
-  int rows = 4;
-  escribir_xlsx(cols, rows);
-  return 0;
+
+  crear_archivo_salida(Salitas);
 }

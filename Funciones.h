@@ -20,3 +20,4 @@ void imprimir_vector_cursos(vector<Curso> vector);
 void imprimir_vector_profes(vector<Profesor> vector);
 
 void escribir_xlsx(int cols, int rows);
+void crear_archivo_salida(vector <Sala> salas);
