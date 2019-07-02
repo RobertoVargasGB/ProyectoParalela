@@ -4,6 +4,7 @@
 #include <xlnt/xlnt.hpp>
 
 using namespace std;
+using namespace xlnt;
 
 //Crea matriz de una pagina.
 vector<vector<string>> leer_pagina(xlnt::workbook wb, int index);
@@ -19,5 +20,6 @@ void imprimir_vector_salas(vector<Sala> vector);
 void imprimir_vector_cursos(vector<Curso> vector);
 void imprimir_vector_profes(vector<Profesor> vector);
 
-void escribir_xlsx(int cols, int rows);
-void crear_archivo_salida(vector <Sala> salas);
+void escribir_xlsx(xlnt::workbook,string,int,string,int,int);
+xlnt::workbook crear_archivo_salida(vector <Sala> salas);
+void crear_horario(vector <Profesor> profe, vector <Sala> sala , vector <Curso> curso,xlnt::workbook horario);

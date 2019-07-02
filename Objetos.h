@@ -32,6 +32,7 @@ public:
   void imprimir_sala ();
   vector <vector<string>> get_disponibilidad_sala();
   string get_nombre_sala();
+  int get_id_sala();
 
 private:
   int id_sala;//identificacion unica de la Sala

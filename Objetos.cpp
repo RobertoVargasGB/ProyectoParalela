@@ -89,7 +89,9 @@ vector <vector<string>>Sala::get_disponibilidad_sala(){
 string Sala::get_nombre_sala(){
   return nombre_sala;
 }
-
+int Sala::get_id_sala(){
+  return id_sala;
+}
 
 //**************clase curso*****************
 Curso::Curso(){
