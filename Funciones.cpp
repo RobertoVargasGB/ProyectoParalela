@@ -4,7 +4,7 @@
 #include <fstream>
 #include <stdio.h>
 #include <xlnt/xlnt.hpp>
-#include <typeinfo>
+
 
 #include "Funciones.h"
 #include "Objetos.h"
@@ -83,9 +83,15 @@ xlnt::workbook crear_archivo_salida(vector <Sala> salas){
     xlnt::worksheet hoja_actual = Salida.sheet_by_index(i);
     string nombre_sala = salas.at(i).get_nombre_sala();
     hoja_actual.title(nombre_sala);
-    for(int j=0;j<Dias.size();j++){
-      hoja_actual.cell(xlnt::cell_reference(j+2,1)).value(Dias.at(j));
-      hoja_actual.cell(xlnt::cell_reference(1,j+2)).value(Bloques.at(j));
+    for(int j=0;j<Bloques.size();j++){
+      if (j==6){
+        hoja_actual.cell(xlnt::cell_reference(1,j+2)).value(Bloques.at(j));
+      }
+      else{
+        hoja_actual.cell(xlnt::cell_reference(j+2,1)).value(Dias.at(j));
+        hoja_actual.cell(xlnt::cell_reference(1,j+2)).value(Bloques.at(j));
+      }
+
     }
   }
   Salida.save(dest_filename);
@@ -230,7 +236,7 @@ vector <Profesor> leer_profes(xlnt::workbook wb){
 //******************Funcion que crea el horario************************
 // *optimizable for de prioridad, cantidad de cursos de los profes.
 
-
+//
 void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos, vector <Sala> vector_salas,xlnt::workbook Salida){
 
   for (int priority=0;priority<39;priority++){ // Se privilegia la prioridad del profe ante cualquier cosa
@@ -266,7 +272,7 @@ void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos
 
                         disponibilidad_profe.at(bloque_actual).at(dia_actual)="0"; // al usar la disponibilidad del profe se cambia a no disponible
                         disponibilidad_sala.at(bloque_actual).at(dia_actual)=="0"; // al usar la disponibilidad de la sala se cambia a no disponible
-                        escribir_xlsx(Salida,nuevo_profe.get_id(),nueva_sala.get_id_sala(),nuevo_curso.get_id_curso(),bloque,dia); // funcion que escribe excel de salida
+                        escribir_xlsx(Salida,nuevo_profe.get_id(),nueva_sala.get_id_sala(),nuevo_curso.get_id_curso(),bloque_actual,dia_actual); // funcion que escribe excel de salida
                         aux2=aux2-2;// se resta de a 2 ya que la cantidad de bloques corresponden a las horas pedagogicas
                       }
                     }
@@ -299,7 +305,7 @@ void crear_horario(vector <Profesor> vector_profes, vector <Curso> vector_cursos
                       if(disponibilidad_profe.at(bloque_actual).at(dia_actual)=="1"&&disponibilidad_sala.at(bloque_actual).at(dia_actual)=="1" ){ // se comprueba la disponibilidad tanto del profe como la de la sala
                         disponibilidad_profe.at(bloque_actual).at(dia_actual)="0"; // al usar la disponibilidad del profe se cambia a no disponible
                         disponibilidad_sala.at(bloque_actual).at(dia_actual)=="0"; // al usar la disponibilidad de la sala se cambia a no disponible
-                        escribir_xlsx(Salida,nuevo_profe.get_id(),nueva_sala.get_id_sala(),nuevo_curso.get_id_curso(),bloque,dia); // funcion que escribe excel de salida
+                        escribir_xlsx(Salida,nuevo_profe.get_id(),nueva_sala.get_id_sala(),nuevo_curso.get_id_curso(),bloque_actual,dia_actual); // funcion que escribe excel de salida
                         aux2=aux2-2;// se resta de a 2 ya que la cantidad de bloques corresponden a las horas pedagogicas
                       }
                     }

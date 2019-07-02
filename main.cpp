@@ -28,8 +28,6 @@ int main (int argc, char *argv[]){
 
 
   xlnt::workbook Horario =crear_archivo_salida(Salas);
-
-
-  crear_horario(Profe,Salas,Cursos,Horario);
-
+  //crear_horario(Profe,Salas,Cursos,Horario);
+  return 0;
 }

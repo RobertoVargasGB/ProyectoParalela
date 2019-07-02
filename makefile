@@ -2,7 +2,7 @@ CXX= g++
 CXXFLAGS = -std=c++14
 
 FUENTE= main.cpp
-NOMBRE= horario.out
+NOMBRE= horario
 XLSX = archivos/Cursos.xlsx archivos/Docentes.xlsx archivos/Salas.xlsx
 
 CLASES= Objetos.cpp
@@ -12,7 +12,7 @@ LIB = -Ixlnt/include -lxlnt
 
 
 
-tarea:	$(FUENTE) $(CLASES) $(FUNCIONES)
+Horario:	$(FUENTE) $(CLASES) $(FUNCIONES)
 	$(CXX) $(FUENTE) -o $(NOMBRE) $(CLASES) $(FUNCIONES) $(CXXFLAGS) $(LIB)
 	clear
 	./$(NOMBRE) $(XLSX)

@@ -1,7 +1,12 @@
-#ifndef OBJETOS_H
-#define OBJETOS_H
+
+#pragma once
+
+#include "Objetos.h"
+#include <xlnt/xlnt.hpp>
 
 using namespace std;
+using namespace xlnt;
+
 
 class Profesor{
 public:
@@ -76,5 +81,3 @@ private:
   string id_profesor;
 
 };
-
-#endif
