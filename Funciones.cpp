@@ -240,19 +240,22 @@ vector <Profesor> leer_profes(xlnt::workbook wb){
 
 
 void crear_horario(vector <Profesor> vector_profes, vector <Sala> &vector_salas, vector <Curso> vector_cursos){
+
   for (int priority=0;priority<39;priority++){ // for que va cambiando de profes
 
 
-    for(int profe=0;profe<vector_profes.size();profe++){ // Recorre los profesores por prioridad
+    for(int profe=0;profe<10;profe++){ // Recorre los profesores por prioridad
       Profesor nuevo_profe=vector_profes.at(profe); // carga el objeto con la info del vector
       vector <vector<string>> disponibilidad_profe=nuevo_profe.get_disponibilidad_profesor(); // se crea una matriz que guarda la disponibilidad del profe
-
+      cout <<"Recorriendo profesor : "<<nuevo_profe.get_id()<<endl;
       if (priority==nuevo_profe.get_prioridad()){ // busca a un profe con la prioridad actual del for anterior
         for(int curso=0;curso<vector_cursos.size();curso++){ // se recorre el vector cursos con el objetivo de obtener su info
 
           Curso nuevo_curso=vector_cursos.at(curso); // Se carga el objeto con su info
           string id_curso=nuevo_curso.get_id_curso(); // se obtiene la id del curso
-          if(id_curso[2]=='F'){ // con la id del curso se sabe que tipo de curso es ( info u otro )
+
+          cout <<"Recorriendo curso :"<<nuevo_curso.get_id_curso()<<endl;
+          if(id_curso[2]=='F'&&id_curso[0]=='I'){ // con la id del curso se sabe que tipo de curso es ( info u otro )
 
             if(nuevo_profe.get_id()==nuevo_curso.get_id_profesor()){ //verificar si el profe imparte el curso
 
@@ -260,57 +263,80 @@ void crear_horario(vector <Profesor> vector_profes, vector <Sala> &vector_salas,
               int carga_academica= stoi(aux_bloques_curso,nullptr,10); // con la intencion de poder restar la carga despues
 
               for(int sala=0;sala<vector_salas.size();sala++){ // Recorrre las salas
+
                 Sala nueva_sala=vector_salas.at(sala); // objeto sala inicializado
                 vector <vector<string>> disponibilidad_sala = nueva_sala.get_disponibilidad_sala(); // se obtiene la disponibilidad de la sala actual en una matriz
                 string nombre_sala = nueva_sala.get_nombre_sala();
+                cout <<"Recorriendo sala: "<<nombre_sala<<endl;
 
-                while (carga_academica>0){ //cantidad de bloques necesarias para el curso
+                if(nombre_sala[0]=='L'){
 
-                  for(int dia=5;dia>=0;dia--){ // se recorre por dia partiendo por el sabado hasta el lunes
-                    cout<<"recorriendo dia de la semana"<<dia<<endl; //
-                    if(dia==5){ // si el dia es sabado
-                      if(nombre_sala[0]=='L'){ // si la sala actual  es lab
+                  while (carga_academica>0){ //cantidad de bloques necesarias para el curso
 
-                        for (int bloque=0;bloque<4;bloque++){ // se recorren lo bloques de la sala actual
+                    for(int dia=5;dia>=0;dia--){ // se recorre por dia partiendo por el sabado hasta el lunes
+                      cout<<"recorriendo dia de la semana "<<dia<<endl; //
+                      if(dia==5){ // si el dia es sabado
 
-                          string disponibilidad_sala_instante = disponibilidad_sala.at(dia).at(bloque); // se guarda la disponibilidad de la sala actual
-                          string disponibilidad_profe_instante= disponibilidad_profe.at(dia).at(bloque); // se guarda la disponibilidad del profe actual
 
-                          if(disponibilidad_profe_instante=="1"&&disponibilidad_sala_instante=="1"){ // si el profe y la sala esta disponible
+                          for (int bloque=0;bloque<4;bloque++){ // se recorren lo bloques de la sala actual
+                            cout <<"Recorriendo bloque: "<<bloque<<endl;
+                            string disponibilidad_sala_instante = disponibilidad_sala.at(dia).at(bloque); // se guarda la disponibilidad de la sala actual
+                            string disponibilidad_profe_instante= disponibilidad_profe.at(dia).at(bloque); // se guarda la disponibilidad del profe actual
 
-                            disponibilidad_profe.at(dia).at(bloque)="0"; // cambia a no disponible la disponibilidad actual del profe
-                            disponibilidad_sala.at(dia).at(bloque)=nuevo_curso.get_id_curso()+"-" + nuevo_profe.get_id(); // cambia la disponibildad de la sala y se guardan las id
+                            if(disponibilidad_profe_instante=="1"&&disponibilidad_sala_instante=="1"){ // si el profe y la sala esta disponible
+                              cout <<"ASIGNANDO BLOQUE HORARIO"<<endl;
+                              disponibilidad_profe.at(dia).at(bloque)="0"; // cambia a no disponible la disponibilidad actual del profe
+                              disponibilidad_sala.at(dia).at(bloque)=nuevo_curso.get_id_curso()+"-" + nuevo_profe.get_id(); // cambia la disponibildad de la sala y se guardan las id
 
-                          }
-                        }
-                      }
-                    } //if dia sabado
-                    else{//si es otro dia distinto de sabado
-                      if(nombre_sala[0]=='L'){ // si la sala actual  es lab
-
-                        for (int bloque=0;bloque<7;bloque++){ // se recorren lo bloques de la sala actual
-
-                          string disponibilidad_sala_instante = disponibilidad_sala.at(dia).at(bloque); // se guarda la disponibilidad de la sala actual
-                          string disponibilidad_profe_instante= disponibilidad_profe.at(dia).at(bloque); // se guarda la disponibilidad del profe actual
-
-                          if(disponibilidad_profe_instante=="1"&&disponibilidad_sala_instante=="1"){ // si el profe y la sala esta disponible
-
-                            disponibilidad_profe.at(dia).at(bloque)="0"; // cambia a no disponible la disponibilidad actual del profe
-                            disponibilidad_sala.at(dia).at(bloque)=nuevo_curso.get_id_curso()+"-" + nuevo_profe.get_id(); // cambia la disponibildad de la sala y se guardan las id
+                              nueva_sala.set_disponibilidad(disponibilidad_sala);
+                              vector_salas.at(sala)=nueva_sala;
+                              cout <<carga_academica<<"antes de la resta "<<endl;
+                              carga_academica=carga_academica-2;
+                              break;
+                            }
 
                           }
-                        }
-                      }
-                    }//else otro dia
+
+                      } //if dia sabado
+                      else{//si es otro dia distinto de sabado
+                        // si la sala actual  es lab
+
+                            for (int bloque=0;bloque<7;bloque++){ // se recorren lo bloques de la sala actual
+                            cout <<"Recorriendo bloque: "<<bloque<<endl;
+                            string disponibilidad_sala_instante = disponibilidad_sala.at(dia).at(bloque); // se guarda la disponibilidad de la sala actual
+                            string disponibilidad_profe_instante= disponibilidad_profe.at(dia).at(bloque); // se guarda la disponibilidad del profe actual
+
+                            if(disponibilidad_profe_instante=="1"&&disponibilidad_sala_instante=="1"){ // si el profe y la sala esta disponible
+                              cout <<"ASIGNANDO BLOQUE HORARIO"<<endl;
+                              disponibilidad_profe.at(dia).at(bloque)="0"; // cambia a no disponible la disponibilidad actual del profe
+                              disponibilidad_sala.at(dia).at(bloque)=nuevo_curso.get_id_curso()+"-" + nuevo_profe.get_id(); // cambia la disponibildad de la sala y se guardan las id
+
+                               nueva_sala.set_disponibilidad(disponibilidad_sala);
+                               vector_salas.at(sala)=nueva_sala;
+                               cout <<carga_academica<<"antes de la resta "<<endl;
+                               carga_academica=carga_academica-2;
+                               break;
+                            }
+
+                          }
+
+                      }//else otro dia
+                    }
+                  nueva_sala.set_disponibilidad(disponibilidad_sala);
+                  vector_salas.at(sala)=nueva_sala;
+                  //carga_academica=carga_academica-2;
                   }
-                nueva_sala.set_disponibilidad(disponibilidad_sala);
-                vector_salas.at(sala)=nueva_sala;
-                carga_academica=carga_academica-2;
                 }
-              }
+
+
+
+              }//for salas
             }
 
           }//Cierre del if curso tipo informatica
+
+
+
 
           else{ // no es de info el curso
             if(nuevo_profe.get_id()==nuevo_curso.get_id_profesor()){ //verificar si el profe imparte el curso
@@ -322,53 +348,65 @@ void crear_horario(vector <Profesor> vector_profes, vector <Sala> &vector_salas,
                 Sala nueva_sala=vector_salas.at(sala); // objeto sala inicializado
                 vector <vector<string>> disponibilidad_sala = nueva_sala.get_disponibilidad_sala(); // se obtiene la disponibilidad de la sala actual en una matriz
                 string nombre_sala = nueva_sala.get_nombre_sala();
-                while (carga_academica>0){ //cantidad de bloques necesarias para el curso
-                  for(int dia=5;dia>=0;dia--){ // se recorre por dia partiendo por el sabado hasta el lunes
-                    cout<<"recorriendo dia de la semana"<<dia<<endl; //
-                    if(dia==5){ // si el dia es sabado
-                      if(nombre_sala[0]!='L'){ // si la sala actual no es lab
 
+                if(nombre_sala[0]!='L'){
+
+                  while (carga_academica>0){ //cantidad de bloques necesarias para el curso
+                    for(int dia=5;dia>=0;dia--){ // se recorre por dia partiendo por el sabado hasta el lunes
+                      cout<<"recorriendo dia de la semana"<<dia<<endl; //
+                      if(dia==5){ // si el dia es sabado
                         for (int bloque=0;bloque<4;bloque++){ // se recorren lo bloques de la sala actual
-
+                          cout <<"Recorriendo bloque: "<<bloque<<endl;
                           string disponibilidad_sala_instante = disponibilidad_sala.at(dia).at(bloque); // se guarda la disponibilidad de la sala actual
                           string disponibilidad_profe_instante= disponibilidad_profe.at(dia).at(bloque); // se guarda la disponibilidad del profe actual
 
                           if(disponibilidad_profe_instante=="1"&&disponibilidad_sala_instante=="1"){ // si el profe y la sala esta disponible
-
+                            cout <<"ASIGNANDO BLOQUE HORARIO"<<endl;
                             disponibilidad_profe.at(dia).at(bloque)="0"; // cambia a no disponible la disponibilidad actual del profe
                             disponibilidad_sala.at(dia).at(bloque)=nuevo_curso.get_id_curso()+"-" + nuevo_profe.get_id(); // cambia la disponibildad de la sala y se guardan las id
 
+                            cout <<carga_academica<<"antes de la resta "<<endl;
+                            nueva_sala.set_disponibilidad(disponibilidad_sala);
+                            vector_salas.at(sala)=nueva_sala;
+                            carga_academica=carga_academica-2;
+                            break;
                           }
+
                         }
                       }
                       else{
-                        if(nombre_sala[0]!='L'){ // si la sala actual  es lab
-
                           for (int bloque=0;bloque<7;bloque++){ // se recorren lo bloques de la sala actual
+                          cout <<"Recorriendo bloque: "<<bloque<<endl;
+                          string disponibilidad_sala_instante = disponibilidad_sala.at(dia).at(bloque); // se guarda la disponibilidad de la sala actual
+                          string disponibilidad_profe_instante= disponibilidad_profe.at(dia).at(bloque); // se guarda la disponibilidad del profe actual
 
-                            string disponibilidad_sala_instante = disponibilidad_sala.at(dia).at(bloque); // se guarda la disponibilidad de la sala actual
-                            string disponibilidad_profe_instante= disponibilidad_profe.at(dia).at(bloque); // se guarda la disponibilidad del profe actual
+                          if(disponibilidad_profe_instante=="1"&&disponibilidad_sala_instante=="1"){ // si el profe y la sala esta disponible
+                            cout <<"ASIGNANDO BLOQUE HORARIO"<<endl;
+                            disponibilidad_profe.at(dia).at(bloque)="0"; // cambia a no disponible la disponibilidad actual del profe
+                            disponibilidad_sala.at(dia).at(bloque)=nuevo_curso.get_id_curso()+"-" + nuevo_profe.get_id(); // cambia la disponibildad de la sala y se guardan las id
+                            cout <<carga_academica<<"antes de la resta "<<endl;
 
-                            if(disponibilidad_profe_instante=="1"&&disponibilidad_sala_instante=="1"){ // si el profe y la sala esta disponible
+                            nueva_sala.set_disponibilidad(disponibilidad_sala);
+                            vector_salas.at(sala)=nueva_sala;
+                            carga_academica=carga_academica-2;
+                            break;
 
-                              disponibilidad_profe.at(dia).at(bloque)="0"; // cambia a no disponible la disponibilidad actual del profe
-                              disponibilidad_sala.at(dia).at(bloque)=nuevo_curso.get_id_curso()+"-" + nuevo_profe.get_id(); // cambia la disponibildad de la sala y se guardan las id
-
-                            }
                           }
+
                         }
                       }
                     }
-                  }
-                nueva_sala.set_disponibilidad(disponibilidad_sala);
-                vector_salas.at(sala)=nueva_sala;
-                carga_academica=carga_academica-2;
+                   nueva_sala.set_disponibilidad(disponibilidad_sala);
+                   vector_salas.at(sala)=nueva_sala;
+                  //carga_academica=carga_academica-2;
+                  cout <<carga_academica<<"despues de la resta "<<endl;
                 }
-              }
+              }// for sala
             }
-          }//cierre else curso no informatica
-        }
+          }
+        }//cierre else curso no informatica
       }
     }
   }
+}
 }
