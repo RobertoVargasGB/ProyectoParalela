@@ -1,8 +1,14 @@
 #pragma once
 
-#include "Objetos.h"
+#include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+#include <stdio.h>
 #include <xlnt/xlnt.hpp>
+#include <typeinfo>
 
+#include "Objetos.h"
 using namespace std;
 using namespace xlnt;
 
@@ -22,4 +28,4 @@ void imprimir_vector_profes(vector<Profesor> vector);
 
 void escribir_xlsx(xlnt::workbook,string,int,string,int,int);
 xlnt::workbook crear_archivo_salida(vector <Sala> salas);
-void crear_horario(vector <Profesor> profe, vector <Sala> sala , vector <Curso> curso,xlnt::workbook horario);
+void crear_horario(vector <Profesor> profes, vector <Sala> salas  , vector <Curso> cursos ,xlnt::workbook xlxs);
