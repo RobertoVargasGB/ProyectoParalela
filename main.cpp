@@ -27,7 +27,9 @@ int main (int argc, char *argv[]){
 
 
 
-  xlnt::workbook Horario =crear_archivo_salida(Salas);
-  //crear_horario(Profe,Salas,Cursos,Horario);
+
+
+  // escribir_xlsx(Horario,"PROFE PRUEBA", 3, "CURSO PRUEBA",1,1);
+  crear_horario(Profe,Salas,Cursos);
   return 0;
 }

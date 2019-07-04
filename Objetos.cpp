@@ -3,6 +3,7 @@
 #include <sstream>
 #include <fstream>
 #include <stdio.h>
+#include <iostream> 
 #include "Objetos.h"
 #include "Funciones.h"
 #include <xlnt/xlnt.hpp>

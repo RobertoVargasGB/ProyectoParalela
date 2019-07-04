@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef _OBJETOS_H_
+#define _OBJETOS_H_
 
 #include "Objetos.h"
 #include <xlnt/xlnt.hpp>
@@ -81,3 +82,4 @@ private:
   string id_profesor;
 
 };
+#endif

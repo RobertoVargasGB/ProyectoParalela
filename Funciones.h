@@ -1,5 +1,8 @@
-#pragma once
 
+#ifndef _FUNCIONES_H_
+#define _FUNCIONES_H_
+
+#include <iostream>
 #include <string>
 #include <vector>
 #include <sstream>
@@ -28,4 +31,5 @@ void imprimir_vector_profes(vector<Profesor> vector);
 
 void escribir_xlsx(xlnt::workbook,string,int,string,int,int);
 xlnt::workbook crear_archivo_salida(vector <Sala> salas);
-void crear_horario(vector <Profesor> profes, vector <Sala> salas  , vector <Curso> cursos ,xlnt::workbook xlxs);
+void crear_horario(vector <Profesor> profes, vector <Sala> salas  , vector <Curso> cursos);
+#endif
