@@ -29,7 +29,8 @@ void imprimir_vector_salas(vector<Sala> vector);
 void imprimir_vector_cursos(vector<Curso> vector);
 void imprimir_vector_profes(vector<Profesor> vector);
 
+
 void escribir_xlsx(xlnt::workbook,string,int,string,int,int);
 xlnt::workbook crear_archivo_salida(vector <Sala> salas);
-void crear_horario(vector <Profesor> profes, vector <Sala> salas  , vector <Curso> cursos);
+void crear_horario(vector <Profesor> profes, vector <Sala> &salas  , vector <Curso> cursos);
 #endif

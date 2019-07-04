@@ -28,8 +28,9 @@ int main (int argc, char *argv[]){
 
 
 
-
-  // escribir_xlsx(Horario,"PROFE PRUEBA", 3, "CURSO PRUEBA",1,1);
+  xlnt::workbook Horario =crear_archivo_salida(Salas);
+  //escribir_xlsx(Horario,"PROFE PRUEBA", 3, "CURSO PRUEBA",1,1);
   crear_horario(Profe,Salas,Cursos);
+  imprimir_vector_salas(Salas);
   return 0;
 }

@@ -3,7 +3,7 @@
 #include <sstream>
 #include <fstream>
 #include <stdio.h>
-#include <iostream> 
+#include <iostream>
 #include "Objetos.h"
 #include "Funciones.h"
 #include <xlnt/xlnt.hpp>
@@ -29,7 +29,7 @@ void Profesor::llenar_profesor(string id, string nombre, string apellido,int pri
   this -> disponibilidad_profesor=disponibilidad;
 
 }
-  void Profesor::cambiar_disponibilidad(vector<vector<string>> disponibilidad){
+void Profesor::cambiar_disponibilidad(vector<vector<string>> disponibilidad){
   this -> disponibilidad_profesor=disponibilidad;
 }
 
@@ -50,6 +50,7 @@ void Profesor::agrega_disponibilidad(vector <string> disponibilidad_dia, int pri
   prioridad_profe=prioridad_profe+priority;
 
 }
+
 int Profesor::get_prioridad(){
   return prioridad_profe;
 }
@@ -77,6 +78,7 @@ void Sala::llenar_sala(int id, string edificio, string numero,string nombre, vec
   this -> disponibilidad_sala=disponibilidad;
 
 }
+
 void Sala::imprimir_sala(){
     cout << "sala " << id_sala <<"  "<<nombre_sala<< " "<< endl;
     imprimir(disponibilidad_sala);
@@ -94,6 +96,9 @@ int Sala::get_id_sala(){
   return id_sala;
 }
 
+void Sala::set_disponibilidad(vector <vector<string>> disponibilidad_nueva){
+  this -> disponibilidad_sala=disponibilidad_nueva;
+}
 //**************clase curso*****************
 Curso::Curso(){
   this -> id_curso="0";
@@ -129,3 +134,25 @@ void Curso::set_bloques(string bloques){
 string Curso::get_id_curso(){
   return id_curso;
 }
+
+// Secciones::Secciones(){
+//   this -> id_curso="0";
+//   this ->id_profe= "0";
+//
+// }
+// void Secciones::llenar_seccion(string id_profe, string id_curso,vector<vector<string>> horas){
+//   this -> id_curso=id_curso;
+//   this -> id_profesor=id_profe;
+//   this -> horas_asignadas=horas;
+//
+// }
+// void Secciones::imprimir_secciones(){
+//
+//
+//     cout << "Id profesor: " << id_profesor<<endl;
+//     cout << "id curso: " << id_curso<<endl;
+//     imprimir(horas_asignadas);
+//
+//
+//
+// }

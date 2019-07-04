@@ -39,6 +39,7 @@ public:
   vector <vector<string>> get_disponibilidad_sala();
   string get_nombre_sala();
   int get_id_sala();
+  void set_disponibilidad(vector<vector<string>>);
 
 private:
   int id_sala;//identificacion unica de la Sala
@@ -50,15 +51,17 @@ private:
 
 
 
-class Secciones{ //Seccion de un curso que tiene asignado solo un profesor
-
-public:
-
-private:
-  string id_curso;
-  string id_profesor;
-
-};
+// class Secciones{ //Seccion de un curso que tiene asignado solo un profesor
+//
+// public:
+//   void llenar_seccion(string,string,vector<vector<string>>);
+//   void imprimir_secciones();
+// private:
+//   string id_curso;
+//   string id_profesor;
+//   vector <vector<string>> horas_asignadas;
+//
+// };
 
 
 
