@@ -49,22 +49,6 @@ private:
   vector<vector<string>> disponibilidad_sala;
 };
 
-
-
-// class Secciones{ //Seccion de un curso que tiene asignado solo un profesor
-//
-// public:
-//   void llenar_seccion(string,string,vector<vector<string>>);
-//   void imprimir_secciones();
-// private:
-//   string id_curso;
-//   string id_profesor;
-//   vector <vector<string>> horas_asignadas;
-//
-// };
-
-
-
 class Curso{ //Asignatura que tiene cantidad de bloques y un codigo de asignatura.
           //puede ser dictada por un profesor o más pero no en el mismo horario.
 public:

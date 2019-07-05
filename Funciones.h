@@ -28,6 +28,7 @@ void imprimir_enteros(vector<vector<int>>vector);
 void imprimir_vector_salas(vector<Sala> vector);
 void imprimir_vector_cursos(vector<Curso> vector);
 void imprimir_vector_profes(vector<Profesor> vector);
+void escribir_horario(vector <Sala> Salas, xlnt::workbook Salida );
 
 
 void escribir_xlsx(xlnt::workbook,string,int,string,int,int);

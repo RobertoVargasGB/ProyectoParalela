@@ -74,7 +74,7 @@ void Sala::llenar_sala(int id, string edificio, string numero,string nombre, vec
   this -> id_sala=id;
   this -> edificio=edificio;
   this -> numero_sala=numero;
-  this ->nombre_sala=nombre;
+  this -> nombre_sala=nombre;
   this -> disponibilidad_sala=disponibilidad;
 
 }
@@ -134,25 +134,3 @@ void Curso::set_bloques(string bloques){
 string Curso::get_id_curso(){
   return id_curso;
 }
-
-// Secciones::Secciones(){
-//   this -> id_curso="0";
-//   this ->id_profe= "0";
-//
-// }
-// void Secciones::llenar_seccion(string id_profe, string id_curso,vector<vector<string>> horas){
-//   this -> id_curso=id_curso;
-//   this -> id_profesor=id_profe;
-//   this -> horas_asignadas=horas;
-//
-// }
-// void Secciones::imprimir_secciones(){
-//
-//
-//     cout << "Id profesor: " << id_profesor<<endl;
-//     cout << "id curso: " << id_curso<<endl;
-//     imprimir(horas_asignadas);
-//
-//
-//
-// }
