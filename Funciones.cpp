@@ -114,8 +114,8 @@ void escribir_horario(vector <Sala> Salas, xlnt::workbook Salida ){
   for(int sala=1; sala<Salas.size();sala++){
     Sala nueva_sala=Salas.at(sala);
     vector<vector<string>> matriz_disponibilidad_sala = nueva_sala.get_disponibilidad_sala();
-    for(int dia=0; dia< matriz_disponibilidad_sala.size();dia++){
-      for(int bloque=0; bloque<matriz_disponibilidad_sala.size(); bloque++){
+    for(int dia=0; dia<matriz_disponibilidad_sala.size();dia++){
+      for(int bloque=0; bloque<matriz_disponibilidad_sala.at(dia).size(); bloque++){
         string codigos=matriz_disponibilidad_sala.at(dia).at(bloque);
         int id_sala=nueva_sala.get_id_sala();
         escribir_xlsx(Salida, codigos, id_sala,bloque,dia);
