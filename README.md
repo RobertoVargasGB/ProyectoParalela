@@ -27,13 +27,10 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 ### Uso
 
-> Compilar
+> Compilar y ejecutar
 	
 	$ make
 
-> Ejecutar
-	
-	$ 
 	
 ### Autores
 - Roberto Vargas Jabre
