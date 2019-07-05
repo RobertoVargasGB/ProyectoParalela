@@ -103,14 +103,26 @@ xlnt::workbook crear_archivo_salida(vector <Sala> salas){
 
 }
 
-void escribir_xlsx(xlnt::workbook Salida, string id_profe, int id_sala, string id_curso, int bloque, int dia ){
+void escribir_xlsx(xlnt::workbook Salida, string codigos, int id_sala, int bloque, int dia ){
   string dest_filename = "Salida.xlsx";
   xlnt::worksheet hoja = Salida.sheet_by_index(id_sala);
-  hoja.cell(xlnt::cell_reference(dia+1, bloque+1)).value(id_curso + "-" + id_profe);
+  hoja.cell(xlnt::cell_reference(dia+1, bloque+1)).value(codigos);
   Salida.save(dest_filename);
 }
 
-
+void escribir_horario(vector <Sala> Salas, xlnt::workbook Salida ){
+  for(int sala=1; sala<Salas.size();sala++){
+    Sala nueva_sala=Salas.at(sala);
+    vector<vector<string>> matriz_disponibilidad_sala = nueva_sala.get_disponibilidad_sala();
+    for(int dia=0; dia< matriz_disponibilidad_sala.size();dia++){
+      for(int bloque=0; bloque<matriz_disponibilidad_sala.size(); bloque++){
+        string codigos=matriz_disponibilidad_sala.at(dia).at(bloque);
+        int id_sala=nueva_sala.get_id_sala();
+        escribir_xlsx(Salida, codigos, id_sala,bloque,dia);
+      }
+    }
+  }
+}
 //********************funciones de lectura y llenado ***************************
 
 vector <Curso> leer_cursos(xlnt::workbook wb){
@@ -412,7 +424,7 @@ void crear_horario(vector <Profesor> vector_profes, vector <Sala> &vector_salas,
                   }
                   nueva_sala.set_disponibilidad(disponibilidad_sala);
                   vector_salas.at(sala)=nueva_sala;
-                }// for sala
+                } // for sala
               }
               if (terminar_while_inf_semana) {
                 curso++;

@@ -32,5 +32,7 @@ int main (int argc, char *argv[]){
   //escribir_xlsx(Horario,"PROFE PRUEBA", 3, "CURSO PRUEBA",1,1);
   crear_horario(Profe,Salas,Cursos);
   imprimir_vector_salas(Salas);
+  escribir_horario(Salas, Horario);
+
   return 0;
 }
