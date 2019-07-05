@@ -74,7 +74,7 @@ void Sala::llenar_sala(int id, string edificio, string numero,string nombre, vec
   this -> id_sala=id;
   this -> edificio=edificio;
   this -> numero_sala=numero;
-  this ->nombre_sala=nombre;
+  this -> nombre_sala=nombre;
   this -> disponibilidad_sala=disponibilidad;
 
 }
