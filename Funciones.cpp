@@ -111,6 +111,7 @@ void escribir_xlsx(xlnt::workbook Salida, string codigos, int id_sala, int bloqu
 }
 
 void escribir_horario(vector <Sala> Salas, xlnt::workbook Salida ){ // escribe horario en xlsx
+  string dest_filename = "Salida.xlsx";
   for(int sala=0; sala<Salas.size();sala++){ // se recorre el vector Salas
     Sala nueva_sala=Salas.at(sala); // se crea un objeto tipo Sala donde se guarda la info del vector Salas
     vector<vector<string>> matriz_disponibilidad_sala = nueva_sala.get_disponibilidad_sala(); // se genera la matriz disponibilidad sala para guardar dicha info
@@ -121,10 +122,13 @@ void escribir_horario(vector <Sala> Salas, xlnt::workbook Salida ){ // escribe h
 
         string codigos=matriz_disponibilidad_sala.at(dia).at(bloque); // se guardan los codigos de disponibilidad
         int id_sala=nueva_sala.get_id_sala();
-        escribir_xlsx(Salida, codigos, id_sala, bloque, dia);
+        // escribir_xlsx(Salida, codigos, id_sala, bloque, dia);
+        xlnt::worksheet hoja = Salida.sheet_by_index(id_sala);
+        hoja.cell(xlnt::cell_reference(dia+2, bloque+2)).value(codigos);
       }
     }
   }
+  Salida.save(dest_filename);
 }
 //********************funciones de lectura y llenado ***************************
 
